@@ -1,0 +1,11 @@
+.correct {
+    color: #36e636;
+}
+
+.incorrect {
+    color: red;
+}
+
+.undetermined {
+    color: gray;
+}
