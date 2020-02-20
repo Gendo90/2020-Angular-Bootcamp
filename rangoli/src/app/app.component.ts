@@ -36,7 +36,6 @@ export class AppComponent {
         this.background_color = color;
         }
 
-
     getRangoli() {
         fetch(`https://wayscript.com/api?api_key=HRLP2pxChqSxV1uUFCnPeUo7OmXMTH0OePNsvb7OPww&program_id=8192&variables=${this.size}`
         ).then(response => {
@@ -48,4 +47,20 @@ export class AppComponent {
             this.rangoli_state = json_result.Result.body.results;
             return this.rangoli_state;
     });}
+
+    getRandomColor() {
+        let ind = Math.floor(Math.random()*this.CSS_COLOR_NAMES.length)
+        return this.CSS_COLOR_NAMES[ind]
+        }
+
+    interval_var = null;
+    cycleColors() {
+        this.interval_var = setInterval(()=>{this.background_color = this.getRandomColor()},
+        1000);
+    }
+
+    stopCycle() {
+        clearInterval(this.interval_var);
+        this.interval_var = null;
+    }
 }
