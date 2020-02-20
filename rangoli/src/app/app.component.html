@@ -17,14 +17,14 @@
       <!-- ADD HEADER HERE -->
       <!-- ADD DESCRIPTION OF PAGE AND BACKGROUND HERE! -->
       <div class="rangoli_holder">
-          <div id="rangoli_space" class="rangoli" [style.background-color]="background_color">
-              <p *ngFor="let line of rangoli_state">{{line}}</p>
+          <div id="rangoli_space" [style.background-color]="background_color">
+              <p class="rangoli" *ngFor="let line of rangoli_state">{{line}}</p>
           </div>
       </div>
       <article class="flex-list">
 
           <div class="list_desc">
-                  Rangoli size (between 1 and 26): <input type="text" id="input_size" name="input_size" [value]="size"><br>
+                  Rangoli size (between 1 and 26): <input type="text" id="input_size" name="input_size" (input)="updateSize($event.target.value)" [value]="size"><br>
                   <button id="submit" (click)="getRangoli()">Submit</button>
                   <br />
 

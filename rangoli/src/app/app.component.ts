@@ -27,7 +27,7 @@ export class AppComponent {
     background_color = "white";
 
     //size of the rangoli pattern
-    size = 10;
+    size = "10";
 
     //url to get the new rangoli pattern
     url = 'https://wayscript.com/api?';
@@ -35,6 +35,10 @@ export class AppComponent {
     updateBackground(color: string) {
         this.background_color = color;
         }
+
+    updateSize(newSize: string) {
+        this.size = newSize;
+    }
 
     getRangoli() {
         fetch(`https://wayscript.com/api?api_key=HRLP2pxChqSxV1uUFCnPeUo7OmXMTH0OePNsvb7OPww&program_id=8192&variables=${this.size}`
