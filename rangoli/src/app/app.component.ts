@@ -24,7 +24,7 @@ export class AppComponent {
                       '--------e--------'];
 
     //rangoli background color
-    background_color = "white";
+    background_color = "#f3f3f3";
 
     //size of the rangoli pattern
     size = "10";
@@ -40,6 +40,26 @@ export class AppComponent {
         this.size = newSize;
     }
 
+    getRandomColor() {
+        let ind = Math.floor(Math.random()*this.CSS_COLOR_NAMES.length)
+        return this.CSS_COLOR_NAMES[ind]
+        }
+
+    setRangoliCharColors(arr: Array<string>) {
+        for (let i = 0; i<arr.length; i++) {
+            console.log(i)
+            let line_arr = arr[i].split("")
+            console.log(line_arr)
+            for (let char of line_arr) {
+                console.log(char);
+                if(!this.seen_chars.has(char)) {
+                    this.seen_chars.set(char, this.getRandomColor());
+                }
+            }
+        }
+        // console.log(this.seen_chars)
+    }
+
     getRangoli() {
         fetch(`https://wayscript.com/api?api_key=HRLP2pxChqSxV1uUFCnPeUo7OmXMTH0OePNsvb7OPww&program_id=8192&variables=${this.size}`
         ).then(response => {
@@ -47,17 +67,14 @@ export class AppComponent {
         })
         .then(json_result => {
             console.log(json_result);
-            // console.log(json_result.Result.body.results);
+            this.seen_chars.clear()
             this.rangoli_state = json_result.Result.body.results;
+            this.setRangoliCharColors(this.rangoli_state);
             return this.rangoli_state;
     });}
 
-    getRandomColor() {
-        let ind = Math.floor(Math.random()*this.CSS_COLOR_NAMES.length)
-        return this.CSS_COLOR_NAMES[ind]
-        }
-
     interval_var = null;
+
     cycleColors() {
         this.interval_var = setInterval(()=>{this.background_color = this.getRandomColor()},
         1000);

@@ -17,8 +17,10 @@
       <!-- ADD HEADER HERE -->
       <!-- ADD DESCRIPTION OF PAGE AND BACKGROUND HERE! -->
       <div class="rangoli_holder">
-          <div id="rangoli_space" [style.background-color]="background_color">
-              <p class="rangoli" *ngFor="let line of rangoli_state">{{line}}</p>
+          <div id="rangoli_space" class="rangoli" [style.background-color]="background_color">
+              <p *ngFor="let line of rangoli_state; let i = index;">
+                  <span *ngFor="let char of line.split('')" [style.color]="seen_chars.get(char)">{{char}}</span>
+                  </p>
           </div>
       </div>
       <article class="flex-list">
