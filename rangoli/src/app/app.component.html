@@ -17,20 +17,21 @@
       <!-- ADD HEADER HERE -->
       <!-- ADD DESCRIPTION OF PAGE AND BACKGROUND HERE! -->
       <div class="rangoli_holder">
-          <div id="rangoli_space" class="rangoli">
+          <div id="rangoli_space" class="rangoli" [style.background-color]="background_color">
+              <p *ngFor="let line of rangoli_state">{{line}}</p>
           </div>
       </div>
       <article class="flex-list">
 
           <div class="list_desc">
-                  Rangoli size (between 1 and 26): <input type="text" id="input_size" name="input_size" value="10"><br>
-                  <button id="submit">Submit</button>
+                  Rangoli size (between 1 and 26): <input type="text" id="input_size" name="input_size" [value]="size"><br>
+                  <button id="submit" (click)="getRangoli()">Submit</button>
                   <br />
 
           </div>
           <div class="list_desc">
               Set background color:
-              <select id="background-colors">
+              <select id="background-colors" (change)="updateBackground($event.target.value)">
                   <option *ngFor="let color of CSS_COLOR_NAMES" [value]="color">{{color}}</option>
               </select>
           </div>
@@ -41,11 +42,5 @@
       </article>
       <br />
   </main>
-
-  <div id="lets-connect" class="dark-gray">
-    <h2 class="orange center-text">Let's Connect</h2>
-      <ul id="footerContacts" class="flex-box">
-    </ul>
-  </div>
 </body>
 </html>
