@@ -9,6 +9,8 @@ export class AppComponent {
   name: string;
   date: string;
   amount: number;
+  //for custom pipe demonstration
+  distance: number;
 
   onNameChange(value: string) {
       this.name = value;
@@ -20,5 +22,9 @@ export class AppComponent {
 
   onAmountChange(value: string) {
       this.amount = Number(value);
+  }
+
+  onDistanceChange(value: string) {
+      this.distance = Number(value);
   }
 }
