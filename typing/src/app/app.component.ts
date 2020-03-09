@@ -9,11 +9,14 @@ import { lorem } from "faker";
 export class AppComponent {
   randomText = lorem.sentence();
   inputText = '';
+  lastTyped = 0;
   show = true;
 
   getInputText(text: string) {
-      // console.log(text);
-      this.inputText = text;
+      if(text.length === this.lastTyped+1 || text.length <= this.lastTyped) {
+          this.inputText = text;
+          this.lastTyped = text.length;
+      }
   }
 
   checkChar(char: string, i: number) {
