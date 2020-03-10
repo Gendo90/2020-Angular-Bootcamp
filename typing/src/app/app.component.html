@@ -8,7 +8,7 @@
                 <!-- sentence generated in app.component.ts -->
             </p>
             <div class="field">
-                <input class="input" (input)="getInputText($event.target.value)" [value]="inputText" />
+                <input class="input" (input)="getInputText($event)" />
             </div>
             <div class="box has-text-centered" *ngIf="inputText === randomText">
                 <h3 class="title">Success!</h3>

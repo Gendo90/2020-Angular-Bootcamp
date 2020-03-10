@@ -9,14 +9,27 @@ import { lorem } from "faker";
 export class AppComponent {
   randomText = lorem.sentence();
   inputText = '';
-  lastTyped = 0;
   show = true;
 
-  getInputText(text: string) {
-      if(text.length === this.lastTyped+1 || text.length <= this.lastTyped) {
+  getInputText(e: any) {
+      let text = e.target.value;
+      console.log(e)
+      console.log(e.inputType)
+      if (e.inputType === "insertFromPaste") {
+            e.preventDefault();
+            e.target.value = this.inputText;
+        }
+      else if(text.length === this.inputText.length+1) {
           this.inputText = text;
-          this.lastTyped = text.length;
       }
+      else if(text.length <= this.inputText.length-1) {
+          this.inputText = text;
+      }
+  }
+
+
+  showInputText() {
+      return this.inputText;
   }
 
   checkChar(char: string, i: number) {
