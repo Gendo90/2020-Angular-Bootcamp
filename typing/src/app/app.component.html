@@ -5,24 +5,34 @@
             <div class="tabs is-toggle">
                 <ul>
                     <li><a (click) = "getSentence()">Sentence</a></li>
-                    <li><a (click) = "getParagraph()">Paragraph</a></li>
+                    <li><a (click) = "startPracticeTest()">Paragraph</a></li>
                     <li><a
                         [swal] = "{title: 'Typing Test', text:'The test will start upon closing this window!', allowOutsideClick: false}"
-                        (confirm)="getParagraphs()">Full Test</a></li>
+                        (confirm)="startTest()">Full Test</a></li>
                 </ul>
             </div>
 
-            <p class="has-text-centered" >
-                <span *ngFor="let char of randomText.split(''); let i = index;"
-                [class]="checkChar(char, i)">{{char}}</span>
+                <p *ngFor="let para of this.randomTextArr; let i = index;">
+                    <span *ngFor="let char of para.split(''); let j = index;"
+                    [class]="checkChar(char, i, j)">{{char}}</span>
+                    <!-- <span *ngIf="i!==this.randomTextArr.length" [class]="checkChar('\n', i, j)">&nbsp;&nbsp;</span> -->
+                    <br />
+                    <br />
+                </p>
                 <!-- sentence generated in app.component.ts -->
-            </p>
+            <button (click) = "findDifference()">Show Difference</button>
             <div class="field">
                 <input class="input" (input)="getInputText($event)" *ngIf="textType === 'sentence'"/>
                 <textarea class="textarea" (input)="getInputText($event)" *ngIf="textType !== 'sentence'"></textarea>
             </div>
-            <div class="box has-text-centered" *ngIf="inputText === randomText">
+            <div class="box has-text-centered" *ngIf="inputText === randomText ? endTest():false"
+            [swal] = "{title: 'success!'}">
                 <h3 class="title">Success!</h3>
+                <h4 class="title">Stats</h4>
+                <ul>
+                    <li>Time elapsed: {{ timeElapsedMin | number: '1.0-0'}}m {{ timeElapsedSec | number: '2.0-0'}}s</li>
+                    <li>Words Per Minute: {{wpm | number: '1.0-2'}}</li>
+                </ul>
             </div>
         </div>
     </div>
