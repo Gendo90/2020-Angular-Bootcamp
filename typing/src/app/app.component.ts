@@ -16,6 +16,8 @@ export class AppComponent {
   wpm;
   timeElapsedMin;
   timeElapsedSec;
+  //flag to add a button to debug randomText vs. inputText
+  debugging = false;
 
   getSentence() {
       this.randomTextArr = [];
@@ -47,6 +49,7 @@ export class AppComponent {
               //remove the leading space, took a while to find it!
               test2[i] = test2[i].replace(" ", "");
           }
+          //add line breaks for all paragraphs other than the last
           if(i<test2.length-1) {
               this.randomText+= (test2[i] + '\n\n');
               this.randomTextArr.push((test2[i]+"\n\n"));
@@ -58,9 +61,6 @@ export class AppComponent {
       }
       this.inputText = '';
       this.textType = "paragraphs";
-
-      console.log(this.randomText)
-      console.log(this.randomTextArr)
   }
 
   getTime() {
@@ -78,7 +78,7 @@ export class AppComponent {
   }
 
   endTest() {
-      let timeElapsed = (this.getTime() - this.currentTime)/1000;
+      let timeElapsed = (Number(this.getTime()) - this.currentTime)/1000;
       this.timeElapsedMin = Math.floor(timeElapsed/60);
       this.timeElapsedSec = (timeElapsed/60 - this.timeElapsedMin)*60;
       let wordArray = this.randomText.split(" ");

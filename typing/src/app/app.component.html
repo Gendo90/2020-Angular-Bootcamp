@@ -20,7 +20,7 @@
                     <br />
                 </p>
                 <!-- sentence generated in app.component.ts -->
-            <button (click) = "findDifference()">Show Difference</button>
+            <button *ngIf="debugging" (click) = "findDifference()">Show Difference</button>
             <div class="field">
                 <input class="input" (input)="getInputText($event)" *ngIf="textType === 'sentence'"/>
                 <textarea class="textarea" (input)="getInputText($event)" *ngIf="textType !== 'sentence'"></textarea>
