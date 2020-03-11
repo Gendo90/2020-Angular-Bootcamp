@@ -6,7 +6,9 @@
                 <ul>
                     <li><a (click) = "getSentence()">Sentence</a></li>
                     <li><a (click) = "getParagraph()">Paragraph</a></li>
-                    <li><a (click) = "getParagraphs()">Full Test!</a></li>
+                    <li><a
+                        [swal] = "{title: 'Typing Test', text:'The test will start upon closing this window!', allowOutsideClick: false}"
+                        (confirm)="getParagraphs()">Full Test</a></li>
                 </ul>
             </div>
 

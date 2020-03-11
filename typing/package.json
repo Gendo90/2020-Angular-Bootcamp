@@ -19,9 +19,11 @@
     "@angular/platform-browser": "~8.2.4",
     "@angular/platform-browser-dynamic": "~8.2.4",
     "@angular/router": "~8.2.4",
+    "@sweetalert2/ngx-sweetalert2": "^8.0.0",
     "bulma": "^0.8.0",
     "faker": "^4.1.0",
     "rxjs": "~6.4.0",
+    "sweetalert2": "^9.10.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
