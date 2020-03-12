@@ -12,7 +12,7 @@ export class AppComponent {
   inputText = '';
   show = true;
   textType = "sentence";
-  currentTime;
+  currentTime = this.getTime();
   wpm;
   timeElapsedMin;
   timeElapsedSec;
@@ -20,6 +20,7 @@ export class AppComponent {
   debugging = false;
 
   getSentence() {
+      this.resetInput();
       this.randomTextArr = [];
       this.randomText = lorem.sentence();
       this.randomTextArr.push(this.randomText);
@@ -28,6 +29,7 @@ export class AppComponent {
   }
 
   getParagraph() {
+      this.resetInput();
       this.randomTextArr = [];
       this.randomText = lorem.paragraph();
       this.randomTextArr.push(this.randomText);
@@ -36,6 +38,7 @@ export class AppComponent {
   }
 
   getParagraphs() {
+      this.resetInput();
       this.randomTextArr = [];
       this.randomText = "";
       let test = lorem.paragraphs();
@@ -64,7 +67,7 @@ export class AppComponent {
   }
 
   getTime() {
-      return new Date();
+      return Number(new Date());
   }
 
   startTest() {
@@ -77,8 +80,22 @@ export class AppComponent {
       this.currentTime = this.getTime();
   }
 
+  startSentenceQuiz() {
+      this.getSentence();
+      this.currentTime = this.getTime();
+  }
+
+  resetInput() {
+      if(this.textType === 'sentence') {
+          document.querySelector("input").value = '';
+      }
+      else {
+          document.querySelector("textarea").value = '';
+      }
+  }
+
   endTest() {
-      let timeElapsed = (Number(this.getTime()) - this.currentTime)/1000;
+      let timeElapsed = (this.getTime() - this.currentTime)/1000;
       this.timeElapsedMin = Math.floor(timeElapsed/60);
       this.timeElapsedSec = (timeElapsed/60 - this.timeElapsedMin)*60;
       let wordArray = this.randomText.split(" ");
@@ -86,6 +103,8 @@ export class AppComponent {
       //first, because the split function misses the paragraph start word as a
       //separate word due to '\n' being the delimiter
       this.wpm = (wordArray.length + this.randomTextArr.length-1)/(timeElapsed/60);
+      this.resetInput()
+      this.currentTime = this.getTime();
 
       return true;
   }

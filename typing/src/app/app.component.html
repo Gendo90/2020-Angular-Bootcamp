@@ -4,7 +4,7 @@
             <h1 class="title has-text-centered">Typing Game!</h1>
             <div class="tabs is-toggle">
                 <ul>
-                    <li><a (click) = "getSentence()">Sentence</a></li>
+                    <li><a (click) = "startSentenceQuiz()">Sentence</a></li>
                     <li><a (click) = "startPracticeTest()">Paragraph</a></li>
                     <li><a
                         [swal] = "{title: 'Typing Test', text:'The test will start upon closing this window!', allowOutsideClick: false}"
@@ -25,12 +25,11 @@
                 <input class="input" (input)="getInputText($event)" *ngIf="textType === 'sentence'"/>
                 <textarea class="textarea" (input)="getInputText($event)" *ngIf="textType !== 'sentence'"></textarea>
             </div>
-            <div class="box has-text-centered" *ngIf="inputText === randomText ? endTest():false"
-            [swal] = "{title: 'success!'}">
+            <div class="box has-text-centered" *ngIf="inputText === randomText ? endTest():false">
                 <h3 class="title">Success!</h3>
-                <h4 class="title">Stats</h4>
+                <h4 class="subtitle">Stats</h4>
                 <ul>
-                    <li>Time elapsed: {{ timeElapsedMin | number: '1.0-0'}}m {{ timeElapsedSec | number: '2.0-0'}}s</li>
+                    <li>Time elapsed: {{ timeElapsedMin | number: '1.0-0'}}m {{ timeElapsedSec | number: '1.0-0'}}s</li>
                     <li>Words Per Minute: {{wpm | number: '1.0-2'}}</li>
                 </ul>
             </div>
