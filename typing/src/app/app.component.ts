@@ -9,6 +9,9 @@ import { lorem } from "faker";
 export class AppComponent {
   randomText = lorem.sentence();
   randomTextArr = [this.randomText];
+  //initialize the word count per paragraph, a little faster than counting
+  //each time
+  cumulativeWordCountMap = new Map([[0, 0]]);
   inputText = '';
   show = true;
   textType = "sentence";
@@ -19,11 +22,24 @@ export class AppComponent {
   //flag to add a button to debug randomText vs. inputText
   debugging = false;
 
+  setWordCountMap() {
+      this.cumulativeWordCountMap.clear();
+      for (let i=0; i< this.randomTextArr.length; i++) {
+          if(i===0) {
+              this.cumulativeWordCountMap.set(0, 0);
+          }
+          else {
+              this.cumulativeWordCountMap.set(i, this.randomTextArr[i-1].length + this.cumulativeWordCountMap.get(i-1));
+          }
+      }
+  }
+
   getSentence() {
       this.resetInput();
       this.randomTextArr = [];
       this.randomText = lorem.sentence();
       this.randomTextArr.push(this.randomText);
+      this.setWordCountMap()
       this.inputText = '';
       this.textType = "sentence";
   }
@@ -33,6 +49,7 @@ export class AppComponent {
       this.randomTextArr = [];
       this.randomText = lorem.paragraph();
       this.randomTextArr.push(this.randomText);
+      this.setWordCountMap()
       this.inputText = '';
       this.textType = "paragraph";
   }
@@ -62,6 +79,8 @@ export class AppComponent {
               this.randomTextArr.push((test2[i]));
           }
       }
+
+      this.setWordCountMap()
       this.inputText = '';
       this.textType = "paragraphs";
   }
@@ -144,12 +163,8 @@ export class AppComponent {
   }
 
   checkChar(char: string, i: number, j: number) {
-      let paras = 0;
-      let shift = 0;
-      while(paras<i) {
-          shift+=this.randomTextArr[paras].length;
-          paras++;
-      }
+      //shift is simpler now - no for loops!
+      let shift = this.cumulativeWordCountMap.get(i);
       if(j + shift < this.inputText.length) {
           return this.inputText[j + shift] === char ? 'correct':'incorrect';
       }
