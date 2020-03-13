@@ -119,6 +119,21 @@ export class AppComponent {
       }
   }
 
+  checkInputEmpty() {
+      if(this.textType === 'sentence') {
+          return document.querySelector("input").value === '';
+      }
+      else {
+          return document.querySelector("textarea").value === '';
+      }
+  }
+
+  resetTimerAfterTest() {
+      if(this.checkInputEmpty() && this.inputText===this.randomText) {
+          this.currentTime = this.getTime();
+      }
+  }
+
   endTest() {
       let timeElapsed = (this.getTime() - this.currentTime)/1000;
       this.timeElapsedMin = Math.floor(timeElapsed/60);
@@ -130,9 +145,6 @@ export class AppComponent {
       this.wpm = (wordArray.length + this.randomTextArr.length-1)/(timeElapsed/60);
       this.cps = (this.cumulativeCharCountMap.get(this.randomTextArr.length))/(timeElapsed);
       this.resetInput()
-      this.currentTime = this.getTime();
-
-      return true;
   }
 
   getInputText(e: any) {
@@ -154,6 +166,14 @@ export class AppComponent {
       //play sound if text does not match input up to that index
       if(this.inputText!==this.randomText.substring(0, this.inputText.length)) {
           this.playSound();
+      }
+
+      //end the test if the inputText matches the randomText and the input
+      //text element has not been cleared yet!
+      if(this.inputText===this.randomText && !this.checkInputEmpty()) {
+          e.target.blur();
+          this.endTest();
+
       }
   }
 

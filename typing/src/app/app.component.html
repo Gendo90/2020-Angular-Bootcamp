@@ -22,10 +22,10 @@
                 <!-- sentence generated in app.component.ts -->
             <button *ngIf="debugging" (click) = "playSound()">Show Difference</button>
             <div class="field">
-                <input class="input" (input)="getInputText($event)" *ngIf="textType === 'sentence'"/>
-                <textarea class="textarea" (input)="getInputText($event)" *ngIf="textType !== 'sentence'"></textarea>
+                <input class="input" (focus)="resetTimerAfterTest()" (input)="getInputText($event)" *ngIf="textType === 'sentence'"/>
+                <textarea class="textarea" (focus)="resetTimerAfterTest()" (input)="getInputText($event)" *ngIf="textType !== 'sentence'"></textarea>
             </div>
-            <div class="box has-text-centered" *ngIf="inputText === randomText ? endTest():false">
+            <div class="box has-text-centered" *ngIf="(inputText === randomText)">
                 <h3 class="title">Success!</h3>
                 <h4 class="subtitle">Stats</h4>
                 <ul>
