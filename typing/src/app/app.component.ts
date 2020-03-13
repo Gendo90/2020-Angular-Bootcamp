@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { lorem } from "faker";
+import {Howl, Howler} from 'howler';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,10 @@ export class AppComponent {
   cps;
   timeElapsedMin;
   timeElapsedSec;
+  //sound effect on "typo"
+  typoAlert = new Howl({
+  src: ['assets/typing_typo.wav']
+});
   //flag to add a button to debug randomText vs. inputText
   debugging = false;
 
@@ -145,6 +150,11 @@ export class AppComponent {
       else if(text.length <= this.inputText.length-1) {
           this.inputText = text;
       }
+
+      //play sound if text does not match input up to that index
+      if(this.inputText!==this.randomText.substring(0, this.inputText.length)) {
+          this.playSound();
+      }
   }
 
 
@@ -164,11 +174,20 @@ export class AppComponent {
       console.log(difference);
   }
 
+  playSound() {
+      this.typoAlert.play();
+  }
+
   checkChar(char: string, i: number, j: number) {
       //shift is simpler now - no for loops!
       let shift = this.cumulativeCharCountMap.get(i);
       if(j + shift < this.inputText.length) {
-          return this.inputText[j + shift] === char ? 'correct':'incorrect';
+          if(this.inputText[j + shift] === char){
+              return 'correct';
+          }
+          else {
+              return 'incorrect';
+          }
       }
       else
       {
