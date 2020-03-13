@@ -11,25 +11,26 @@ export class AppComponent {
   randomTextArr = [this.randomText];
   //initialize the word count per paragraph, a little faster than counting
   //each time
-  cumulativeWordCountMap = new Map([[0, 0]]);
+  cumulativeCharCountMap = new Map([[0, 0], [1, this.randomText.length]]);
   inputText = '';
   show = true;
   textType = "sentence";
   currentTime = this.getTime();
   wpm;
+  cps;
   timeElapsedMin;
   timeElapsedSec;
   //flag to add a button to debug randomText vs. inputText
   debugging = false;
 
   setWordCountMap() {
-      this.cumulativeWordCountMap.clear();
-      for (let i=0; i< this.randomTextArr.length; i++) {
+      this.cumulativeCharCountMap.clear();
+      for (let i=0; i<= this.randomTextArr.length; i++) {
           if(i===0) {
-              this.cumulativeWordCountMap.set(0, 0);
+              this.cumulativeCharCountMap.set(0, 0);
           }
           else {
-              this.cumulativeWordCountMap.set(i, this.randomTextArr[i-1].length + this.cumulativeWordCountMap.get(i-1));
+              this.cumulativeCharCountMap.set(i, this.randomTextArr[i-1].length + this.cumulativeCharCountMap.get(i-1));
           }
       }
   }
@@ -122,6 +123,7 @@ export class AppComponent {
       //first, because the split function misses the paragraph start word as a
       //separate word due to '\n' being the delimiter
       this.wpm = (wordArray.length + this.randomTextArr.length-1)/(timeElapsed/60);
+      this.cps = (this.cumulativeCharCountMap.get(this.randomTextArr.length))/(timeElapsed);
       this.resetInput()
       this.currentTime = this.getTime();
 
@@ -164,7 +166,7 @@ export class AppComponent {
 
   checkChar(char: string, i: number, j: number) {
       //shift is simpler now - no for loops!
-      let shift = this.cumulativeWordCountMap.get(i);
+      let shift = this.cumulativeCharCountMap.get(i);
       if(j + shift < this.inputText.length) {
           return this.inputText[j + shift] === char ? 'correct':'incorrect';
       }
