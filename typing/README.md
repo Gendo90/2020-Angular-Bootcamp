@@ -51,7 +51,7 @@ sentence test and full test.
 
 ### Full Test (Three Paragraphs)
 
-Type in a three paragraph as fast as you can! This test represents the most
+Type in three paragraphs as fast as you can! This test represents the most
 accurate usage of typing in a more formal setting, where a single sentence or
 paragraph is unlikely to be the extent of a typing project. Additionally, this
 test should give the most accurate results of typing speed, since the
