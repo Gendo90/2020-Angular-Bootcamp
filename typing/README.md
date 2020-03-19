@@ -61,6 +61,10 @@ representative long duration, consistent typing speed statistic. If I ever
 looked into giving a typing speed verification or badge from my app, this is
 the test I would use to qualify users for a certain skill level.
 
+## Dependencies
+
+This application is built with the [Bulma](https://bulma.io/) HTML and CSS styling framework. It uses [Faker](https://www.npmjs.com/package/faker) in order to generate the random text for each test, and it uses [Howler](https://howlerjs.com/) to play the alert sound when the user input text does not match the displayed text. The overall framework for the application is [Angular](https://angularjs.org/) version 9.0.6 with [TypeScript](https://www.typescriptlang.org/) 3.7.5
+
 ## Further Development
 
 One of the primary features to be added to this app is a different test mode
