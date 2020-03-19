@@ -49,7 +49,7 @@ uses three paragraphs. You can use this mode to get used to typing a full
 paragraph of text before attempting the full test, as a step between the
 sentence test and full test.
 
-###"Full Test" (Three Paragraphs)
+### Full Test (Three Paragraphs)
 
 Type in a three paragraph as fast as you can! This test represents the most
 accurate usage of typing in a more formal setting, where a single sentence or
