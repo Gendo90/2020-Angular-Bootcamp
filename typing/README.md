@@ -12,6 +12,8 @@ is Latin, and the average word length appears different than that of English,
 so the wpm statistic does not directly carryover to other languages as well as
 the cps statistic.
 
+You can access and use the app [here](https://typing.patrickgendotti.now.sh/), and if you need help and want a more complete introduction to this application, you can view my YouTube tutorial for this app [here](https://www.youtube.com/watch?v=2QFYBnceafM&feature=youtu.be).
+
 ## Usage
 
 The app is simple and intuitive to use - you just start typing in the input
