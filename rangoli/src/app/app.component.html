@@ -17,9 +17,9 @@
       <!-- ADD HEADER HERE -->
       <!-- ADD DESCRIPTION OF PAGE AND BACKGROUND HERE! -->
       <div class="rangoli_holder">
-          <div id="rangoli_space" class="rangoli" [style.background-color]="background_color" [style.height] = "rangoliHeight + 'px'">
-              <p [style.height]="rowHeight + 'px'" *ngFor="let line of rangoli_state; let i = index;">
-                  <span *ngFor="let char of line.split('')" [style.color]="seen_chars.get(char)" [style.font-size]="charLength+ 'px'">{{char}}</span>
+          <div id="rangoli_space" class="rangoli" [style.background-color]="background_color"> <!--[style.height] = "rangoliHeight + 'px'"-->
+              <p *ngFor="let line of rangoli_state; let i = index;" [style.height]="charLength + 'px'"> <!-- [style.height]="rowHeight + 'px'"  could be set!-->
+                  <span *ngFor="let char of line.split('')" [style.color]="seen_chars.get(char)" [style.background-color]="seen_chars.get(char)" [style.font-size]="charLength+ 'px'">{{char}}</span>
                   </p>
           </div>
       </div>
