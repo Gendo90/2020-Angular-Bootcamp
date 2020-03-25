@@ -29,6 +29,11 @@ export class AppComponent {
     //size of the rangoli pattern
     size = "10";
 
+    //attributes to resize rangoli based on number of characters
+    charLength = ((400)/(4*5))/(0.61);
+    rowHeight = 400/9;
+    rangoliHeight = 400;
+
     //url to get the new rangoli pattern
     url = 'https://wayscript.com/api?';
 
@@ -60,6 +65,32 @@ export class AppComponent {
         // console.log(this.seen_chars)
     }
 
+    /*
+    * An advanced setter method that is used in conjunction with getRangoli()
+    * to wait until the Submit button is clicked to update the rangoli size
+    * dynamically to match the new number of lines, shrinking the letters as
+    * necessary using property binding to keep the rangoli approximately 400px
+    * by 400 px. Before this function and the properties it updates were added,
+    * the rangoli had variable size due to different numbers of characters
+    * being used at a constant font-size - this now limits the difference in
+    * size, reducing the need to scroll or resize the window.
+    */
+    setRangoliSize() {
+        let newSize = parseInt(this.size);
+        this.charLength = ((400)/(4*newSize))/(0.61); //0.61 is the aspect ratio of height to width
+        //need to check if size < 15 due to minimum line-height value being ~14 pixels
+        if(newSize < 15) {
+            this.rowHeight = ((400/(2*newSize)));
+            this.rangoliHeight = 400;
+        }
+        else {
+            //use a standard of 16 pixels for heights of <p> elements if >15 characters used
+            this.rowHeight = 16;
+            this.rangoliHeight = 16*(2*newSize-1)
+        }
+
+    }
+
     getRangoli() {
         fetch(`https://wayscript.com/api?api_key=HRLP2pxChqSxV1uUFCnPeUo7OmXMTH0OePNsvb7OPww&program_id=8192&variables=${this.size}`
         ).then(response => {
@@ -70,6 +101,7 @@ export class AppComponent {
             this.seen_chars.clear()
             this.rangoli_state = json_result.Result.body.results;
             this.setRangoliCharColors(this.rangoli_state);
+            this.setRangoliSize();
             return this.rangoli_state;
     });}
 
