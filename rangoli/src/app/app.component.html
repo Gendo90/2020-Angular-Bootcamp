@@ -34,7 +34,7 @@
           <div class="list_desc">
               Set background color:
               <select id="background-colors" (change)="updateBackground($event.target.value)">
-                  <option *ngFor="let color of CSS_COLOR_NAMES" [value]="color">{{color}}</option>
+                      <option *ngFor="let color of CSS_COLOR_NAMES" [value]="color" [style.background-color]="color">{{color}}</option>
               </select>
           </div>
           <div class="list_desc">
