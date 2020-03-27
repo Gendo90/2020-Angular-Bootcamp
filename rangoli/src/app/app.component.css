@@ -46,7 +46,13 @@ div.rangoli {
     height: 400px;
 }
 
-div.rangoli_holder {
+div.rangoli_holder, div.colorSelector {
     margin:auto;
     text-align: center;
+}
+
+.swatch {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
 }

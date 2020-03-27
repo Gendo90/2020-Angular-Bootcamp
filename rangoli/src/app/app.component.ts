@@ -37,6 +37,9 @@ export class AppComponent {
     //url to get the new rangoli pattern
     url = 'https://wayscript.com/api?';
 
+    //property to show the character color selection input
+    charSelected = false;
+
     updateBackground(color: string) {
         this.background_color = color;
         }
@@ -106,7 +109,21 @@ export class AppComponent {
     });}
 
     setLetterColor(char: string) {
+        //want to open a menu to select a color for that character based on
+        //the character chosen! Only if one character selected (some extra
+        //space could be clicked right now)
+        if(char.length === 1) this.charSelected = char;
+    }
+
+    updateCharColor(char: string, color: string) {
+        this.seen_chars.set(char, color);
+        this.charSelected = false;
+    }
+
+    updateCharColorRandom(char: string) {
+        // below code to randomly get a color based on a click
         this.seen_chars.set(char, this.getRandomColor());
+        this.charSelected = false;
     }
 
     interval_var = null;
