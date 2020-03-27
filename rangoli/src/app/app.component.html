@@ -24,12 +24,12 @@
                   </p>
           </div>
       </div>
-      <div class="colorSelector" *ngIf="charSelected">
-          Set last clicked color <span class="swatch" [style.background-color]="seen_chars.get(charSelected)"></span> to:
-          <select class="setCharSelector" id="character-colors" (change)="updateCharColor(charSelected, $event.target.value)">
+      <div class="colorSelector" *ngIf="charSelected[0]">
+          Set last clicked color <span class="swatch" [style.background-color]="seen_chars.get(charSelected[1])"></span> to:
+          <select class="setCharSelector" id="character-colors" (change)="updateCharColor(charSelected[1], $event.target.value)">
               <option *ngFor="let color of CSS_COLOR_NAMES" [value]="color" [style.background-color]="color">{{color}}</option>
           </select>
-          or randomly generate one! <button (click)="updateCharColorRandom(charSelected)">Random</button>
+          or randomly generate one! <button (click)="updateCharColorRandom(charSelected[1])">Random</button>
       </div>
       <article class="flex-list">
 
