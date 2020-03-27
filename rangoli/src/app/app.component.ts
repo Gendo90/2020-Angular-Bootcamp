@@ -105,6 +105,10 @@ export class AppComponent {
             return this.rangoli_state;
     });}
 
+    setLetterColor(char: string) {
+        this.seen_chars.set(char, this.getRandomColor());
+    }
+
     interval_var = null;
 
     cycleColors() {
