@@ -50,8 +50,8 @@
               <button id="halt_cycle" [disabled]="!interval_var" (click)="stopCycle()">Stop Cycling!</button>
           </div>
           <div class="list_desc">
-              <input type="radio" id="zoom" name="cycle_direction" value="inward" checked="checked" (click)="setChecked($event.target.value)">
-              <input type="radio" id="expand" name="cycle_direction" value="outward" (click)="setChecked($event.target.value)">
+              <input type="radio" id="zoom" name="cycle_direction" value="inward" checked="checked" (click)="setChecked($event.target.value)"> inward
+              <input type="radio" id="expand" name="cycle_direction" value="outward" (click)="setChecked($event.target.value)"> outward
               <input type="text" id="loop_speed" name="cycle_direction" (input)="updateLoopSpeed($event.target.value)" [value]="loop_speed">Hz
               <button id="cycle" [disabled]="color_loop_interval_var" (click)="loopColors()">Loop Colors!</button>
               <button id="halt_cycle" [disabled]="!color_loop_interval_var" (click)="stopLooping()">Stop Looping!</button>
