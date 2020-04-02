@@ -137,4 +137,56 @@ export class AppComponent {
         clearInterval(this.interval_var);
         this.interval_var = null;
     }
+
+    color_loop_interval_var = null;
+    loop_speed = "5"
+    loop_direction = "inward"
+
+    //setter for loop_direction property - either inwward or outward!
+    setChecked(val: string) {
+        this.loop_direction = val;
+    }
+
+    //setter for loop_speed property
+    updateLoopSpeed(newSpeed: string) {
+        this.loop_speed = newSpeed;
+    }
+
+    //loops the colors inward or outward at a given speed
+    //depending on the options selected
+    loopColors() {
+        let speed = parseInt(this.loop_speed);
+        let chars = [...this.seen_chars.keys()].sort();
+
+        if(this.loop_direction === "inward") {
+            this.color_loop_interval_var = setInterval(() =>{
+                let last_color = this.seen_chars.get(chars[1]);
+                for (let i = 1; i<chars.length; i++) {
+                    if(i===chars.length-1) {
+                        this.seen_chars.set(chars[i], last_color);
+                    }
+                    else {
+                        this.seen_chars.set(chars[i], this.seen_chars.get(chars[i+1]));
+                    }
+                }}, 1000/(speed))
+        }
+        else {
+            this.color_loop_interval_var = setInterval(() =>{
+                let first_color = this.seen_chars.get(chars[chars.length-1]);
+                for (let i = chars.length-1; i>=1; i--) {
+                    if(i===1) {
+                        this.seen_chars.set(chars[1], first_color);
+                    }
+                    else {
+                        this.seen_chars.set(chars[i], this.seen_chars.get(chars[i-1]));
+                    }
+                }}, 1000/(speed))
+
+        }
+    }
+
+    stopLooping() {
+        clearInterval(this.color_loop_interval_var);
+        this.color_loop_interval_var = null;
+    }
 }
