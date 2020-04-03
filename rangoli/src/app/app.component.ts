@@ -72,6 +72,11 @@ export class AppComponent {
         }
     }
 
+    //colorize the first rangoli
+    ngAfterViewInit() {
+        this.setRangoliCharColors(this.rangoli_state);
+    }
+
     /*
     * An advanced setter method that is used in conjunction with getRangoli()
     * to wait until the Submit button is clicked to update the rangoli size
