@@ -12,7 +12,7 @@ export class AppComponent {
     //map that contains characters seen already and their assigned color
     seen_chars = new Map();
 
-    //initial rangoli
+    //initial rangoli, size 5
     rangoli_state = ['--------e--------',
                       '------e-d-e------',
                       '----e-d-c-d-e----',
@@ -37,19 +37,27 @@ export class AppComponent {
     //url to get the new rangoli pattern
     url = 'https://wayscript.com/api?';
 
+    //setter for background color, changes based on input value or random
+    //value from cycling
     updateBackground(color: string) {
         this.background_color = color;
         }
 
+    //setter method for rangoli size, so that the property changes upon
+    //the user submitting a value
     updateSize(newSize: string) {
         this.size = newSize;
     }
 
+    //randomly selects a color from the CSS_COLOR_NAMES array (of all builtin
+    //CSS color names)
     getRandomColor() {
         let ind = Math.floor(Math.random()*this.CSS_COLOR_NAMES.length)
         return this.CSS_COLOR_NAMES[ind]
         }
 
+    //sets the colors of all characters in the new rangoli to random colors,
+    //used upon loading/initializing a new rangoli
     setRangoliCharColors(arr: Array<string>) {
         for (let i = 0; i<arr.length; i++) {
             console.log(i)
@@ -62,7 +70,6 @@ export class AppComponent {
                 }
             }
         }
-        // console.log(this.seen_chars)
     }
 
     /*
@@ -76,6 +83,7 @@ export class AppComponent {
     * size, reducing the need to scroll or resize the window.
     */
     setRangoliSize() {
+        //TODO: check that the size is a valid integer, input validation
         let newSize = parseInt(this.size);
         this.charLength = ((400)/(4*newSize))/(0.61); //0.61 is the aspect ratio of height to width
         //need to check if size < 15 due to minimum line-height value being ~14 pixels
@@ -105,13 +113,19 @@ export class AppComponent {
             return this.rangoli_state;
     });}
 
+    //property used to clear the background color change interval, which stops
+    //the background color from changing
     interval_var = null;
 
+    //sets the rangoli background to a random color every second, creating a
+    //contrast effect with the letters (which remain the same colors)
     cycleColors() {
         this.interval_var = setInterval(()=>{this.background_color = this.getRandomColor()},
         1000);
     }
 
+    //stops the rangoli background color from changing, with the last color
+    //shown remaining the background color
     stopCycle() {
         clearInterval(this.interval_var);
         this.interval_var = null;
