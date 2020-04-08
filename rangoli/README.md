@@ -15,6 +15,8 @@ To change the background color of the rangoli, a user simply needs to select the
 
 To randomly cycle through background colors for a particular rangoli, click the "Cycle Background Colors!" button. This action will cause the background colors of the rangoli to randomly change to different colors, which can allow the user to see an array of different color combinations clearly for optimal color selection and coordination, and also to view interesting patterns possible given the different colors of each diamond and how they interact with their spacing and neighboring diamond pattern colors. I personally think rangolis of size 10-15 are the best for color selection since the letters are large enough for the contrast or blend to be clearly seen and there are lots of colors that can be compared, but larger rangolis are also useful for seeing how the different diamond colors can form patterns.
 
+<img src="src/assets/rangoli_app.gif">
+
 ## Dependencies
 
 This application is built using the [Angular](https://angularjs.org/) version 8.2.14 framework with [TypeScript](https://www.typescriptlang.org/) 3.5.3 and also uses the [WayScript](https://wayscript.com/) service to run a Python script to generate the rangolis using a custom API.
