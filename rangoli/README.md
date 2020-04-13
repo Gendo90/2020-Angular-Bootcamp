@@ -13,6 +13,8 @@ The rangoli initially shown is a size 5 rangoli, and appears with randomized col
 
 To change the background color of the rangoli, a user simply needs to select their desired color from the available options besides the "Set background color" text. The colors are listed in alphabetical order, and the background color of each option serves as a preview of the color.
 
+To change the color of a character of the rangoli, a user simply needs to click on one of the characters and then select their desired color from the available options besides the "Set character color" text. The colors are listed in alphabetical order, and the background color of each option serves as a preview of the color. A random color can also be set by clicking the "Random" button. Setting the color for one character will change the color of all identical characters to the new color.
+
 To randomly cycle through background colors for a particular rangoli, click the "Cycle Background Colors!" button. This action will cause the background colors of the rangoli to randomly change to different colors, which can allow the user to see an array of different color combinations clearly for optimal color selection and coordination, and also to view interesting patterns possible given the different colors of each diamond and how they interact with their spacing and neighboring diamond pattern colors. I personally think rangolis of size 10-15 are the best for color selection since the letters are large enough for the contrast or blend to be clearly seen and there are lots of colors that can be compared, but larger rangolis are also useful for seeing how the different diamond colors can form patterns.
 
 <img src="src/assets/rangoli_app.gif">
@@ -23,8 +25,6 @@ This application is built using the [Angular](https://angularjs.org/) version 8.
 
 ## Further Development
 
-One of the primary features to be added to this app is color selection for the different letters, so that the color of each different letter can be set via user input. This feature is already prototyped and working, so I just need to add it to this application when I have time!
-
-Another major feature is deprecating the WayScript API endpoint by storing all the possible rangolis (sizes 1 through 26) in a JSON file and then loading a specific size rangoli upon user request, instead of querying the WayScript server, since that should accelerate the rangoli generation time so a user does not need to wait a couple of seconds for the rangoli to load, and also to reduce the number of unnecessary dependencies.
+A major update will be deprecating the WayScript API endpoint by storing all the possible rangolis (sizes 1 through 26) in a JSON file and then loading a specific size rangoli upon user request, instead of querying the WayScript server, since that should accelerate the rangoli generation time so a user does not need to wait a couple of seconds for the rangoli to load, and also to reduce the number of unnecessary dependencies.
 
 At some point, the layout will also be upgraded to use a more professional, stylized interface with an HTML and CSS framework like Bulma or Bootstrap.
