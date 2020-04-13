@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -64,6 +64,17 @@ export class AppComponent {
         //the character chosen! Only if one character selected (some extra
         //space could be clicked right now)
         if(char.length === 1) this.charSelected = [true, char];
+    }
+
+    //code to listen for an "r" keypress to select a random color for that
+    //character after clicking a character in the rangoli - essentially makes
+    //"r" a shortcut key!
+    @HostListener('window:keyup', ['$event'])
+    keyEvent(event: KeyboardEvent) {
+        console.log(event);
+        if(event.code === "KeyR" && this.charSelected[0]===true) {
+            this.updateCharColorRandom(this.charSelected[1]);
+        }
     }
 
     //sets the colors of all characters in the new rangoli to random colors,
