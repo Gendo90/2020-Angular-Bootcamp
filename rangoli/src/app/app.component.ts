@@ -152,10 +152,16 @@ export class AppComponent {
     color_loop_interval_var = null;
     loop_speed = "5"
     loop_direction = "inward"
+    color_pattern = "repeating"
 
     //setter for loop_direction property - either inwward or outward!
-    setChecked(val: string) {
+    setCheckedDirection(val: string) {
         this.loop_direction = val;
+    }
+
+    //setter for color_pattern property - either repeating or random!
+    setCheckedColors(val: string) {
+        this.color_pattern = val;
     }
 
     //setter for loop_speed property
@@ -170,18 +176,33 @@ export class AppComponent {
         let chars = [...this.seen_chars.keys()].sort();
 
         if(this.loop_direction === "inward") {
-            this.color_loop_interval_var = setInterval(() =>{
-                let last_color = this.seen_chars.get(chars[1]);
-                for (let i = 1; i<chars.length; i++) {
-                    if(i===chars.length-1) {
-                        this.seen_chars.set(chars[i], last_color);
-                    }
-                    else {
-                        this.seen_chars.set(chars[i], this.seen_chars.get(chars[i+1]));
-                    }
-                }}, 1000/(speed))
+            if(this.color_pattern === "repeating") {
+                this.color_loop_interval_var = setInterval(() => {
+                    let last_color = this.seen_chars.get(chars[1]);
+                    for (let i = 1; i<chars.length; i++) {
+                        if(i===chars.length-1) {
+                            this.seen_chars.set(chars[i], last_color);
+                        }
+                        else {
+                            this.seen_chars.set(chars[i], this.seen_chars.get(chars[i+1]));
+                        }
+                    }}, 1000/(speed))
+                }
+            else {
+                this.color_loop_interval_var = setInterval(() => {
+                    // let last_color = this.seen_chars.get(chars[1]);
+                    for (let i = 1; i<chars.length; i++) {
+                        if(i===chars.length-1) {
+                            this.seen_chars.set(chars[i], this.getRandomColor());
+                        }
+                        else {
+                            this.seen_chars.set(chars[i], this.seen_chars.get(chars[i+1]));
+                        }
+                    }}, 1000/(speed))
+            }
         }
         else {
+            if(this.color_pattern === "repeating") {
             this.color_loop_interval_var = setInterval(() =>{
                 let first_color = this.seen_chars.get(chars[chars.length-1]);
                 for (let i = chars.length-1; i>=1; i--) {
@@ -192,6 +213,19 @@ export class AppComponent {
                         this.seen_chars.set(chars[i], this.seen_chars.get(chars[i-1]));
                     }
                 }}, 1000/(speed))
+            }
+            else {
+                this.color_loop_interval_var = setInterval(() =>{
+                    // let first_color = this.seen_chars.get(chars[chars.length-1]);
+                    for (let i = chars.length-1; i>=1; i--) {
+                        if(i===1) {
+                            this.seen_chars.set(chars[1], this.getRandomColor());
+                        }
+                        else {
+                            this.seen_chars.set(chars[i], this.seen_chars.get(chars[i-1]));
+                        }
+                    }}, 1000/(speed))
+            }
 
         }
     }
