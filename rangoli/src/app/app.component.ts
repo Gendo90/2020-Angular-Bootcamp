@@ -234,4 +234,39 @@ export class AppComponent {
         clearInterval(this.color_loop_interval_var);
         this.color_loop_interval_var = null;
     }
+
+    spinID = null;
+    spin_rate = 3; //in Hz, get from input later
+
+    setSpinID(val) {
+        this.spinID = val;
+    }
+
+    spinRangoli() {
+        let last = null;
+        let element = document.getElementById("spin_sleeve")
+        let last_angle = 0;
+        let spinner = this.spinID;
+        let rate = this.spin_rate;
+        let root = this;
+
+        function step(timestamp) {
+          if(!last) last = timestamp;
+          let progress = timestamp - last;
+          last = timestamp;
+          element.style.transform = 'rotate(' + last_angle + 'deg)';
+          last_angle = (last_angle+(360.0*rate/1000)*progress)%360;
+          root.spinID = window.requestAnimationFrame(step);
+        }
+
+        this.spinID = window.requestAnimationFrame(step);
+    }
+
+    stopRangoliSpin() {
+        window.cancelAnimationFrame(this.spinID);
+        this.spinID = null;
+    }
+
+
+
 }

@@ -18,10 +18,12 @@
       <!-- ADD DESCRIPTION OF PAGE AND BACKGROUND HERE! -->
       <div class="rangoli_holder">
           <div id="rangoli_space" class="rangoli" [style.background-color]="background_color" (click)="setLetterColor($event.target.textContent)"> <!--[style.height] = "rangoliHeight + 'px'"-->
-              <p *ngFor="let line of rangoli_state; let i = index;" [style.height]="charLength + 'px'"> <!-- [style.height]="rowHeight + 'px'"  could be set!-->
-                  <span *ngFor="let char of line.split('')" [style.color]="seen_chars.get(char)" [style.background-color]="seen_chars.get(char)"
-                  [style.font-size]="charLength+ 'px'">{{char}}</span>
-                  </p>
+              <div id="spin_sleeve">
+                  <p *ngFor="let line of rangoli_state; let i = index;" [style.height]="charLength + 'px'"> <!-- [style.height]="rowHeight + 'px'"  could be set!-->
+                      <span *ngFor="let char of line.split('')" [style.color]="seen_chars.get(char)" [style.background-color]="seen_chars.get(char)"
+                      [style.font-size]="charLength+ 'px'">{{char}}</span>
+                      </p>
+              </div>
           </div>
       </div>
       <div class="colorSelector" *ngIf="charSelected[0]">
@@ -48,6 +50,10 @@
           <div class="list_desc">
               <button id="cycle" [disabled]="interval_var" (click)="cycleColors()">Cycle Background Colors!</button>
               <button id="halt_cycle" [disabled]="!interval_var" (click)="stopCycle()">Stop Cycling!</button>
+          </div>
+          <div class="list_desc">
+              <button id="spin" [disabled]="spinID" (click)="spinRangoli()">Spin Rangoli!</button>
+              <button id="halt_spin" [disabled]="!spinID" (click)="stopRangoliSpin()">Stop Spinning!</button>
           </div>
           <div class="list_desc">
               <div>
