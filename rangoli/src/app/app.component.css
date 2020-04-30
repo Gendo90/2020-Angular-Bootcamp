@@ -51,6 +51,11 @@ div.rangoli_holder, div.colorSelector {
     text-align: center;
 }
 
+div.rangoli_holder {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
 .swatch {
     width: 1em;
     height: 1em;

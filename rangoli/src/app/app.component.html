@@ -16,7 +16,7 @@
   <main>
       <!-- ADD HEADER HERE -->
       <!-- ADD DESCRIPTION OF PAGE AND BACKGROUND HERE! -->
-      <div class="rangoli_holder">
+      <div class="rangoli_holder" [style.background-color]="background_color">
           <div id="rangoli_space" class="rangoli" [style.background-color]="background_color" (click)="setLetterColor($event.target.textContent)"> <!--[style.height] = "rangoliHeight + 'px'"-->
               <div id="spin_sleeve">
                   <p *ngFor="let line of rangoli_state; let i = index;" [style.height]="charLength + 'px'"> <!-- [style.height]="rowHeight + 'px'"  could be set!-->
