@@ -53,9 +53,26 @@ export class AppComponent {
   spin(event: any) {
       console.log("spinning", this.spinning)
       if(this.spinning===true){
-          let nextPos = {x:event.clientX-this.center[0], y:this.center[1]-event.clientY}
+          //case where the user is on a computer with a mouse
+          let nextPos;
+          let x;
+          let y;
+          if(event.touches === undefined) {
+             nextPos = {x:event.clientX-this.center[0], y:this.center[1]-event.clientY}
+             x = nextPos.x;
+             y = nextPos.y;
+          }
+          //case where user is on a touchscreen device
+          else {
+              let touch = event.touches[0]
+              console.log(touch, touch.clientX, touch.clientY)
+              nextPos = {x:touch.clientX-this.center[0], y:this.center[1]-touch.clientY}
+              x = touch.clientX-this.center[0];
+              y = this.center[1]-touch.clientY;
+          }
+          console.log(nextPos)
           // let change = (nextPos.y+this.last_pos.y)/(nextPos.x-this.last_pos.x)*(180/Math.PI);
-          let nextAng = -Math.atan((nextPos.y)/(nextPos.x))*(180/Math.PI);
+          let nextAng = -Math.atan((y)/(x))*(180/Math.PI);//-Math.atan((nextPos.y)/(nextPos.x))*(180/Math.PI);
           this.spinner_img.style.transform = `rotate(${nextAng}deg)`;
           // console.log(this.last_ang)
           console.log(nextAng)
@@ -63,14 +80,13 @@ export class AppComponent {
           this.w_velocity = (nextAng-this.last_ang)/(event.timeStamp-this.curr_timestamp);
           console.log(this.w_velocity)
           this.curr_timestamp = event.timeStamp;
-          this.last_pos = nextPos;
+          this.last_pos = {x:x, y:y};
           this.last_ang = nextAng;
       }
   }
 
   //included below as an arrow function, can put this in later
   freespin() {
-      console.log(still_spinning)
       if(Math.abs(this.w_velocity)>0.01) {
           let nextAng = this.last_ang - this.w_velocity*(25)
           this.spinner_img.style.transform = `rotate(${nextAng}deg)`;
@@ -92,10 +108,9 @@ export class AppComponent {
           this.spinning = false;
           // console.log(Math.abs(this.w_velocity))
           let root = this;
-          if(!Math.abs(this.w_velocity)<=0.01) {
+          if(!(Math.abs(this.w_velocity)<=0.01)) {
               console.log(this.spinning_int)
               this.spinning_int = setInterval(() => {
-                  console.log("still_spinning")
                   if(Math.abs(this.w_velocity)>0.01) {
                       let nextAng = this.last_ang + this.w_velocity*(25)
                       this.spinner_img.style.transform = `rotate(${nextAng}deg)`;
