@@ -1,0 +1,10 @@
+.spinner_holder {
+    width: 300px;
+    height: 300px;
+}
+
+.spinner_image {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+}
