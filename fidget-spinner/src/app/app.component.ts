@@ -87,15 +87,18 @@ export class AppComponent {
 
   //included below as an arrow function, can put this in later
   freespin() {
+      console.log(this.w_velocity)
       if(Math.abs(this.w_velocity)>0.01) {
-          let nextAng = this.last_ang - this.w_velocity*(25)
+          let nextAng = this.last_ang + this.w_velocity*(25)
           this.spinner_img.style.transform = `rotate(${nextAng}deg)`;
           this.last_ang = nextAng;
           console.log("Omega is ", this.w_velocity)
           this.w_velocity = this.w_velocity/1.01;
+          // setTimeout(root.freespin(root), 25);
       }
       else {
-          // console.log(this.w_velocity)
+          console.log("clearing spin")
+          console.log(this.w_velocity)
           clearInterval(this.spinning_int)
           this.w_velocity = 0
           // console.log(this.spinning_int)
@@ -108,24 +111,10 @@ export class AppComponent {
           this.spinning = false;
           // console.log(Math.abs(this.w_velocity))
           let root = this;
-          if(!(Math.abs(this.w_velocity)<=0.01)) {
+          if(!(Math.abs(root.w_velocity)<=0.01)) {
               console.log(this.spinning_int)
-              this.spinning_int = setInterval(() => {
-                  if(Math.abs(this.w_velocity)>0.01) {
-                      let nextAng = this.last_ang + this.w_velocity*(25)
-                      this.spinner_img.style.transform = `rotate(${nextAng}deg)`;
-                      this.last_ang = nextAng;
-                      console.log("Omega is ", this.w_velocity)
-                      this.w_velocity = this.w_velocity/1.01;
-                  }
-                  else {
-                      console.log(this.w_velocity)
-                      clearInterval(this.spinning_int)
-                      this.w_velocity = 0
-                      // console.log(this.spinning_int)
-                      // console.log("done")
-                  }
-              }, 25);
+              this.spinning_int = setInterval(() => this.freespin(), 25)//setInterval(root.freespin(root), 25);
+              console.log(root.w_velocity)
               // console.log(this.spinning_int)
               // console.log("free spinning")
           }
