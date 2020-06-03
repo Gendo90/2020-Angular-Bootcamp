@@ -120,4 +120,28 @@ export class AppComponent {
           }
       }
   }
+
+  //function to update the image when a new image file is selected
+  updateImage(event: any) {
+      console.log(event);
+      console.log(event.target.files)
+      let reader = new FileReader()
+      let new_img = event.target.files[0]
+
+
+      //wait until the file has been loaded to show the new image
+      reader.addEventListener("load", () => {
+          //conditional required due to TypeScript being particular about types
+          if(typeof reader.result === "string") {
+              document.querySelector("img").src = reader.result
+          }
+          else {
+              document.querySelector("img").src = reader.result.toString()
+          }
+
+      }, false)
+
+      reader.readAsDataURL(new_img)
+
+  }
 }
