@@ -12,7 +12,7 @@ The app is simple and intuitive to use - you just click on the logo and hold the
 
 ### Loading Different Spinners
 
-One of the primary features to be added to this app is different logos or images that can be spun - round or otherwise. In fact, an addition on top of this would be to enable custom image loading for your own fidget spinners, where the user can drag and drop or otherwise add images that can be spun to a fidget spinner session. The base code for this application will likely be reused in further apps planned, such as a roulette wheel, or spinner "input" for a game or decision matrix.
+This app now supports loading different logos or images that can be spun - round or otherwise! You can use custom image loading for your own fidget spinners, simply by clicking <button>Choose File</button> and browsing to the desired graphic. The chosen graphic can now be spun like the original spinner during this fidget spinner session.
 
 ## Dependencies
 
@@ -25,5 +25,7 @@ I am currently looking at adding a gallery of different fidget spinners to choos
 I am also planning on adding an inversion pulse feature, that inverts the spinner image repeatedly at a frequency given by the user.
 
 Another new feature that I want to add is a background color behind the spinner and an opacity property to the spinner image, to make custom color blends possible. This feature can be augmented by changing the background color at a certain frequency, maybe to use background colors and maybe to loop through selected colors. This feature is more advanced than the other new features mentioned here, so it will likely debut last.
+
+To note, the base code for this application will likely be reused in further apps planned, such as a roulette wheel, or spinner "input" for a game or decision matrix.
 
  I will likely add this to the rangoli as an option for rotation besides the soon-to-be-released standard constant spin feature.
