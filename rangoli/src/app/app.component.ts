@@ -59,23 +59,23 @@ export class AppComponent {
         return this.CSS_COLOR_NAMES[ind]
         }
 
-    setLetterColor(char: string) {
-        //want to open a menu to select a color for that character based on
-        //the character chosen! Only if one character selected (some extra
-        //space could be clicked right now)
-        if(char.length === 1) this.charSelected = [true, char];
-    }
-
-    //code to listen for an "r" keypress to select a random color for that
-    //character after clicking a character in the rangoli - essentially makes
-    //"r" a shortcut key!
-    @HostListener('window:keyup', ['$event'])
-    keyEvent(event: KeyboardEvent) {
-        console.log(event);
-        if(event.code === "KeyR" && this.charSelected[0]===true) {
-            this.updateCharColorRandom(this.charSelected[1]);
-        }
-    }
+    // setLetterColor(char: string) {
+    //     //want to open a menu to select a color for that character based on
+    //     //the character chosen! Only if one character selected (some extra
+    //     //space could be clicked right now)
+    //     if(char.length === 1) this.charSelected = [true, char];
+    // }
+    //
+    // //code to listen for an "r" keypress to select a random color for that
+    // //character after clicking a character in the rangoli - essentially makes
+    // //"r" a shortcut key!
+    // @HostListener('window:keyup', ['$event'])
+    // keyEvent(event: KeyboardEvent) {
+    //     console.log(event);
+    //     if(event.code === "KeyR" && this.charSelected[0]===true) {
+    //         this.updateCharColorRandom(this.charSelected[1]);
+    //     }
+    // }
 
     //sets the colors of all characters in the new rangoli to random colors,
     //used upon loading/initializing a new rangoli
@@ -91,29 +91,25 @@ export class AppComponent {
                 }
             }
         }
-<<<<<<< HEAD
     }
 
-    updateCharColor(char: string, color: string) {
-        this.seen_chars.set(char, color);
-        this.charSelected = [false, null];
-    }
-
-    updateCharColorRandom(char: string) {
-        // below code to randomly get a color based on a click
-        this.seen_chars.set(char, this.getRandomColor());
-        this.charSelected = [false, null];
-    }
+    // updateCharColor(char: string, color: string) {
+    //     this.seen_chars.set(char, color);
+    //     this.charSelected = [false, null];
+    // }
+    //
+    // updateCharColorRandom(char: string) {
+    //     // below code to randomly get a color based on a click
+    //     this.seen_chars.set(char, this.getRandomColor());
+    //     this.charSelected = [false, null];
+    // }
 
     //colorize the first rangoli
     ngAfterViewInit() {
         this.setRangoliCharColors(this.rangoli_state);
-||||||| merged common ancestors
         // console.log(this.seen_chars)
-=======
-        this.updateBackground(this.seen_chars.get('-'))
+        // this.updateBackground(this.seen_chars.get('-'))
         // console.log(this.seen_chars)
->>>>>>> no-letters
     }
 
     /*
@@ -157,11 +153,8 @@ export class AppComponent {
             return this.rangoli_state;
     });}
 
-<<<<<<< HEAD
     //property used to clear the background color change interval, which stops
     //the background color from changing
-||||||| merged common ancestors
-=======
     setLetterColor(char: string) {
         //want to open a menu to select a color for that character based on
         //the character chosen! Only if one character selected (some extra
@@ -198,7 +191,6 @@ export class AppComponent {
         this.setRangoliCharColors(this.rangoli_state)
     }
 
->>>>>>> no-letters
     interval_var = null;
 
     //sets the rangoli background to a random color every second, creating a
