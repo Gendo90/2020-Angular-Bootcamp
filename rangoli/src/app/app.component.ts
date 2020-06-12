@@ -137,6 +137,13 @@ export class AppComponent {
         }
     }
 
+    //code to set the original rangoli colors
+    @HostListener('window:load', ['$event'])
+    setInitialRangoli(event: KeyboardEvent) {
+        console.log(event);
+        this.setRangoliCharColors(this.rangoli_state)
+    }
+
     interval_var = null;
 
     cycleColors() {
