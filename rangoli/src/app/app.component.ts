@@ -65,6 +65,7 @@ export class AppComponent {
                 }
             }
         }
+        this.updateBackground(this.seen_chars.get('-'))
         // console.log(this.seen_chars)
     }
 
