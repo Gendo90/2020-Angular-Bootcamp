@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- Tells the browser what the title of this page should be. -->
+  <title>Rangoli</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body class="gray">
+  <div class="centered">
+    <h1>Rangoli II</h1>
+  </div> <br />
+  <main>
+      <!-- ADD HEADER HERE -->
+      <!-- ADD DESCRIPTION OF PAGE AND BACKGROUND HERE! -->
+      <div class="rangoli_holder" [style.background-color]="background_color">
+          <div id="rangoli_space" class="rangoli" [style.background-color]="background_color" (click)="setLetterColor($event.target.textContent)"> <!--[style.height] = "rangoliHeight + 'px'"-->
+              <div id="spin_sleeve">
+                  <p *ngFor="let line of rangoli_state; let i = index;" [style.height]="charLength + 'px'"> <!-- [style.height]="rowHeight + 'px'"  could be set!-->
+                      <span *ngFor="let char of line.split('')" [style.color]="seen_chars.get(char)" [style.background-color]="seen_chars.get(char)"
+                      [style.font-size]="charLength+ 'px'">{{char}}</span>
+                      </p>
+              </div>
+          </div>
+      </div>
+      <div class="colorSelector" *ngIf="charSelected[0]">
+          Set last clicked color <span class="swatch" [style.background-color]="seen_chars.get(charSelected[1])"></span> to:
+          <select class="setCharSelector" id="character-colors" (change)="updateCharColor(charSelected[1], $event.target.value)">
+              <option *ngFor="let color of CSS_COLOR_NAMES" [value]="color" [style.background-color]="color">{{color}}</option>
+          </select>
+          or randomly generate one! <button (click)="updateCharColorRandom(charSelected[1])">Random</button>
+      </div>
+      <article class="flex-list">
+
+          <div class="list_desc">
+                  Rangoli size (between 1 and 26): <input type="text" id="input_size" name="input_size" (input)="updateSize($event.target.value)" [value]="size"><br>
+                  <button id="submit" (click)="getRangoli()">Submit</button>
+                  <br />
+
+          </div>
+          <div class="list_desc">
+              Set background color:
+              <select id="background-colors" (change)="updateBackground($event.target.value)">
+                  <option *ngFor="let color of CSS_COLOR_NAMES" [value]="color" [style.background-color]="color">{{color}}</option>
+              </select>
+          </div>
+          <div class="list_desc">
+              <button id="cycle" [disabled]="interval_var" (click)="cycleColors()">Cycle Background Colors!</button>
+              <button id="halt_cycle" [disabled]="!interval_var" (click)="stopCycle()">Stop Cycling!</button>
+          </div>
+          <div class="list_desc">
+              <button id="spin" [disabled]="spinID" (click)="spinRangoli()">Spin Rangoli!</button>
+              <button id="halt_spin" [disabled]="!spinID" (click)="stopRangoliSpin()">Stop Spinning!</button>
+          </div>
+          <div class="list_desc">
+              <div>
+                  <input type="radio" id="zoom" name="cycle_direction" value="inward" checked="checked" (click)="setCheckedDirection($event.target.value)"> inward
+                  <input type="radio" id="expand" name="cycle_direction" value="outward" (click)="setCheckedDirection($event.target.value)"> outward
+              </div>
+              <div>
+                  <input type="radio" id="zoom" name="color_pattern" value="repeating" checked="checked" (click)="setCheckedColors($event.target.value)"> repeating
+                  <input type="radio" id="expand" name="color_pattern" value="random" (click)="setCheckedColors($event.target.value)"> random
+              </div>
+              <input type="text" id="loop_speed" name="cycle_direction" (input)="updateLoopSpeed($event.target.value)" [value]="loop_speed">Hz
+              <button id="cycle" [disabled]="color_loop_interval_var" (click)="loopColors()">Loop Colors!</button>
+              <button id="halt_cycle" [disabled]="!color_loop_interval_var" (click)="stopLooping()">Stop Looping!</button>
+          </div>
+      </article>
+      <br />
+  </main>
+</body>
+</html>
