@@ -12,7 +12,7 @@ export class AppComponent {
     //map that contains characters seen already and their assigned color
     seen_chars = new Map();
 
-    //initial rangoli, size 5
+    //initial rangoli
     rangoli_state = ['--------e--------',
                       '------e-d-e------',
                       '----e-d-c-d-e----',
@@ -40,45 +40,19 @@ export class AppComponent {
     //property to show the character color selection input
     charSelected: [boolean, string] = [false, null];
 
-    //setter for background color, changes based on input value or random
-    //value from cycling
     updateBackground(color: string) {
         this.background_color = color;
         }
 
-    //setter method for rangoli size, so that the property changes upon
-    //the user submitting a value
     updateSize(newSize: string) {
         this.size = newSize;
     }
 
-    //randomly selects a color from the CSS_COLOR_NAMES array (of all builtin
-    //CSS color names)
     getRandomColor() {
         let ind = Math.floor(Math.random()*this.CSS_COLOR_NAMES.length)
         return this.CSS_COLOR_NAMES[ind]
         }
 
-    setLetterColor(char: string) {
-        //want to open a menu to select a color for that character based on
-        //the character chosen! Only if one character selected (some extra
-        //space could be clicked right now)
-        if(char.length === 1) this.charSelected = [true, char];
-    }
-
-    //code to listen for an "r" keypress to select a random color for that
-    //character after clicking a character in the rangoli - essentially makes
-    //"r" a shortcut key!
-    @HostListener('window:keyup', ['$event'])
-    keyEvent(event: KeyboardEvent) {
-        console.log(event);
-        if(event.code === "KeyR" && this.charSelected[0]===true) {
-            this.updateCharColorRandom(this.charSelected[1]);
-        }
-    }
-
-    //sets the colors of all characters in the new rangoli to random colors,
-    //used upon loading/initializing a new rangoli
     setRangoliCharColors(arr: Array<string>) {
         for (let i = 0; i<arr.length; i++) {
             console.log(i)
@@ -91,29 +65,8 @@ export class AppComponent {
                 }
             }
         }
-<<<<<<< HEAD
-    }
-
-    updateCharColor(char: string, color: string) {
-        this.seen_chars.set(char, color);
-        this.charSelected = [false, null];
-    }
-
-    updateCharColorRandom(char: string) {
-        // below code to randomly get a color based on a click
-        this.seen_chars.set(char, this.getRandomColor());
-        this.charSelected = [false, null];
-    }
-
-    //colorize the first rangoli
-    ngAfterViewInit() {
-        this.setRangoliCharColors(this.rangoli_state);
-||||||| merged common ancestors
-        // console.log(this.seen_chars)
-=======
         this.updateBackground(this.seen_chars.get('-'))
         // console.log(this.seen_chars)
->>>>>>> no-letters
     }
 
     /*
@@ -127,7 +80,6 @@ export class AppComponent {
     * size, reducing the need to scroll or resize the window.
     */
     setRangoliSize() {
-        //TODO: check that the size is a valid integer, input validation
         let newSize = parseInt(this.size);
         this.charLength = ((400)/(4*newSize))/(0.61); //0.61 is the aspect ratio of height to width
         //need to check if size < 15 due to minimum line-height value being ~14 pixels
@@ -157,11 +109,6 @@ export class AppComponent {
             return this.rangoli_state;
     });}
 
-<<<<<<< HEAD
-    //property used to clear the background color change interval, which stops
-    //the background color from changing
-||||||| merged common ancestors
-=======
     setLetterColor(char: string) {
         //want to open a menu to select a color for that character based on
         //the character chosen! Only if one character selected (some extra
@@ -198,18 +145,13 @@ export class AppComponent {
         this.setRangoliCharColors(this.rangoli_state)
     }
 
->>>>>>> no-letters
     interval_var = null;
 
-    //sets the rangoli background to a random color every second, creating a
-    //contrast effect with the letters (which remain the same colors)
     cycleColors() {
         this.interval_var = setInterval(()=>{this.background_color = this.getRandomColor()},
         1000);
     }
 
-    //stops the rangoli background color from changing, with the last color
-    //shown remaining the background color
     stopCycle() {
         clearInterval(this.interval_var);
         this.interval_var = null;
