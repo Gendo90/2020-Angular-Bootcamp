@@ -1,5 +1,5 @@
-# Rangoli II App
-
+# Slide Puzzle App
+<!--
 This application was created as an extension of my original [Rangoli app](https://rangoli.patrickgendotti.now.sh/) that can be used to look for interesting color combinations.
 
 Diamond patterns the hallmark of this rangoli design. In fact, each diamond pattern is set to a different random color automatically by the app, and can be manually changed by clicking on any colored rectangles in the diamond and subsequently setting the color. The background color for the rangoli can also be changed by clicking on the background to manually set the color or by cycling through the background colors randomly. The rangoli colors can be looped inward or outward at a given frequency, and they can also be randomly changing as the shift inward or outward if "<input type="radio"> random"  is selected instead of  "<input type="radio"> repeating". The rangoli can also be spun in a clockwise fashion at 3 Hz by clicking <button>Spin Rangoli!</button>
@@ -42,4 +42,4 @@ Another update will involve adding custom spin frequencies to the application, s
 
 The rangoli app will also likely be modified at some point to include a transparency setting, so that the colors can be blended with the background better, almost like a color filter on a window or other light source.
 
-At some point, the layout will also be upgraded to use a more professional, stylized interface with an HTML and CSS framework like Bulma or Bootstrap.
+At some point, the layout will also be upgraded to use a more professional, stylized interface with an HTML and CSS framework like Bulma or Bootstrap. -->
