@@ -25,6 +25,4 @@ This application is built using the [Angular](https://angularjs.org/) version 8.
 
 ## Further Development
 
-A major update will be deprecating the WayScript API endpoint by storing all the possible rangolis (sizes 1 through 26) in a JSON file and then loading a specific size rangoli upon user request, instead of querying the WayScript server, since that should accelerate the rangoli generation time so a user does not need to wait a couple of seconds for the rangoli to load, and also to reduce the number of unnecessary dependencies.
-
-At some point, the layout will also be upgraded to use a more professional, stylized interface with an HTML and CSS framework like Bulma or Bootstrap.
+At some point, the layout will be upgraded to use a more professional, stylized interface with an HTML and CSS framework like Bulma or Bootstrap.
