@@ -143,25 +143,19 @@ export class AppComponent {
     }
 
     getRangoli() {
-        fetch(`https://wayscript.com/api?api_key=HRLP2pxChqSxV1uUFCnPeUo7OmXMTH0OePNsvb7OPww&program_id=8192&variables=${this.size}`
-        ).then(response => {
-            return response.json()
-        })
-        .then(json_result => {
-            console.log(json_result);
-            this.seen_chars.clear()
-            this.rangoli_state = json_result.Result.body.results;
-            this.setRangoliCharColors(this.rangoli_state);
-            this.setRangoliSize();
-            return this.rangoli_state;
-    });}
+        let new_rangoli = this.all_rangolis[this.size]
+        this.seen_chars.clear()
+        this.rangoli_state = new_rangoli;
+        this.setRangoliCharColors(this.rangoli_state);
+        this.setRangoliSize();
+        return this.rangoli_state;
+    }
 
     getAllRangolis() {
         fetch("../assets/rangolis_json.json")
         .then(response => response.json())
         .then(json_result => {
-            this.all_rangolis = json_result
-            console.log(this.all_rangolis)
+            this.all_rangolis = json_result["Rangolis"]
             return this.all_rangolis
         })}
 
