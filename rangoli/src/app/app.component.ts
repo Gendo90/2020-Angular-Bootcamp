@@ -23,6 +23,9 @@ export class AppComponent {
                       '------e-d-e------',
                       '--------e--------'];
 
+    //all rangolis - from json
+    all_rangolis = [];
+
     //rangoli background color
     background_color = "#f3f3f3";
 
@@ -153,6 +156,15 @@ export class AppComponent {
             return this.rangoli_state;
     });}
 
+    getAllRangolis() {
+        fetch("../assets/rangolis_json.json")
+        .then(response => response.json())
+        .then(json_result => {
+            this.all_rangolis = json_result
+            console.log(this.all_rangolis)
+            return this.all_rangolis
+        })}
+
     //property used to clear the background color change interval, which stops
     //the background color from changing
     setLetterColor(char: string) {
@@ -189,6 +201,7 @@ export class AppComponent {
     setInitialRangoli(event: KeyboardEvent) {
         console.log(event);
         this.setRangoliCharColors(this.rangoli_state)
+        this.getAllRangolis();
     }
 
     interval_var = null;
