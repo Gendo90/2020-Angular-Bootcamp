@@ -23,6 +23,10 @@ export class AppComponent {
                       '------e-d-e------',
                       '--------e--------'];
 
+    //variable to store the saved rangoli arrays for each size rangoli,
+    //loaded from the rangolis_json.json file
+    all_rangolis = []
+
     //rangoli background color
     background_color = "#f3f3f3";
 
@@ -96,18 +100,21 @@ export class AppComponent {
     }
 
     getRangoli() {
-        fetch(`https://wayscript.com/api?api_key=HRLP2pxChqSxV1uUFCnPeUo7OmXMTH0OePNsvb7OPww&program_id=8192&variables=${this.size}`
-        ).then(response => {
-            return response.json()
-        })
+        let new_rangoli = this.all_rangolis[this.size]
+        this.seen_chars.clear()
+        this.rangoli_state = new_rangoli;
+        this.setRangoliCharColors(this.rangoli_state);
+        this.setRangoliSize();
+        return this.rangoli_state;
+    }
+
+    getAllRangolis() {
+        fetch("../assets/rangolis_json.json")
+        .then(response => response.json())
         .then(json_result => {
-            console.log(json_result);
-            this.seen_chars.clear()
-            this.rangoli_state = json_result.Result.body.results;
-            this.setRangoliCharColors(this.rangoli_state);
-            this.setRangoliSize();
-            return this.rangoli_state;
-    });}
+            this.all_rangolis = json_result["Rangolis"]
+            return this.all_rangolis
+        })}
 
     setLetterColor(char: string) {
         //want to open a menu to select a color for that character based on
@@ -143,6 +150,7 @@ export class AppComponent {
     setInitialRangoli(event: KeyboardEvent) {
         console.log(event);
         this.setRangoliCharColors(this.rangoli_state)
+        this.getAllRangolis()
     }
 
     interval_var = null;
