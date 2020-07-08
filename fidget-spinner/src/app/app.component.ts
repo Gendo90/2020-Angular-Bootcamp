@@ -144,4 +144,10 @@ export class AppComponent {
       reader.readAsDataURL(new_img)
 
   }
+
+  //updates the image when a thumbnail is clicked
+  updateImageOnClick(event: any) {
+      console.log(event)
+      document.querySelector("img").src = event.target.src
+  }
 }
